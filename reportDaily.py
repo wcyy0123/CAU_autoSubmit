@@ -43,14 +43,49 @@ try:
     driver.implicitly_wait(10)
     time.sleep(5)
     
-    #昨日是否核酸，点“是“
-    element = driver.find_element_by_css_selector('body > div.item-buydate.form-detail2 > div > div > section > div.form > ul > li:nth-child(23) > div > div > div:nth-child(1)')
+    #7日内是否有共同居住者返京
+    element = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[4]/ul/li[10]/div/div/div[2]")
+    driver.execute_script("arguments[0].click();", element)
+    driver.implicitly_wait(10)
+    time.sleep(5)
+    
+    #今日体温范围
+    element = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[4]/ul/li[11]/div/div/div[2]")
+    driver.execute_script("arguments[0].click();", element)
+    driver.implicitly_wait(10)
+    time.sleep(5)
+    
+    #是否已接种疫苗
+    element = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[4]/ul/li[12]/div/div/div[1]")
     driver.execute_script("arguments[0].click();", element)
     driver.implicitly_wait(5)
     time.sleep(5)
+    
+    #疫苗接种地
+    element = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[4]/ul/li[13]/div/div/div[1]")
+    driver.execute_script("arguments[0].click();", element)
+    driver.implicitly_wait(5)
+    time.sleep(5)
+    #加强针
+    element = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[4]/ul/li[14]/div/div/div[1]")
+    driver.execute_script("arguments[0].click();", element)
+    driver.implicitly_wait(5)
+    time.sleep(5)
+    #今日同住人员
+    element = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[4]/ul/li[25]/div/div/div[2]")
+    driver.execute_script("arguments[0].click();", element)
+    driver.implicitly_wait(5)
+    time.sleep(5)
+    #昨日是否核酸，点“是“
+    element = driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[4]/ul/li[27]/div/div/div[1]")
+    driver.execute_script("arguments[0].click();", element)
+    driver.implicitly_wait(5)
+    time.sleep(5)
+    
     #点击提交
     driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[5]/div").click()
     driver.implicitly_wait(5)
+    time.sleep(5)
     #点击确认
     driver.find_element_by_xpath('//*[@id="wapcf"]/div/div[2]/div[2]').click()
     url = 'https://sctapi.ftqq.com/%s.send?text=上报成功啦~&desp=In carnage, I bloom like a flower in the dawn'%sckey
@@ -59,4 +94,6 @@ except:
     print(traceback.format_exc()) 
     url = 'https://sctapi.ftqq.com/%s.send?text=上报失败咯……&desp=手动上报吧=='%sckey
     requests.get(url)
+finally:
+    driver.close()
 
