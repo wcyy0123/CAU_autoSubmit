@@ -83,11 +83,12 @@ try:
     time.sleep(5)
     
     #点击提交
-    driver.find_element_by_xpath("/html/body/div[1]/div/div/section/div[5]/div").click()
+    driver.find_element_by_xpath("/html/body/div[1]/div[1]/div/section/div[5]/div").click()
     driver.implicitly_wait(5)
     time.sleep(5)
     #点击确认
-    driver.find_element_by_xpath('//*[@id="wapcf"]/div/div[2]/div[2]').click()
+    element = driver.find_element_by_xpath('//*[@id="wapcf"]/div/div[2]/div[2]')
+    driver.execute_script("arguments[0].click();", element)
     url = 'https://sctapi.ftqq.com/%s.send?text=上报成功啦~&desp=In carnage, I bloom like a flower in the dawn'%sckey
     requests.get(url)
 except:
